@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZTour</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&subset=cyrillic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="nav-container">
+            <nav class="nav-bar">
+                <div class="left-section">
+
+                    <button class="z" onclick="showMain()" >
+                        <img src="/static/logos/ztype.png" alt="z">
+                    </button>
+
+                    <ul class="nav-links">
+                        <li><a href="/">Home</a></li> 
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="right-section">
+                    <div class="nav-icons">
+                        <a href="#"><img src="/static/logos/image_2025-10-16_20-47-38.png"></a>
+                        <a href="#"><img src="/static/logos/image_2025-10-16_20-47-28.png"></a>
+                        <a href="#"><img src="/static/logos/image_2025-10-16_20-47-47.png"></a>
+                    </div>
+                    
+                    <button class="btn-log-in">Log in</button>
+                    
+                    <div class="user-buttons-container hidden">
+                        <button class="btn-profile" onclick="window.location.href='/profile'">
+                            <img src="/static/logos/profile/image copy.png">
+                        </button>
+
+                        <button class="btn-logout">
+                            <img src="/static/logos/logout/icons8-logout-96.png">
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

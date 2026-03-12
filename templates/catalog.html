@@ -9,34 +9,68 @@
                 
             </div>
             <div class="resort-filters">
-                <div class="catalog-search">
-                    <input class="input-search" type="text" placeholder="Поиск по названию или локации">
-                </div>
                 <div class="dropdown">
-                    <button class="dropdown-btn" onclick="toggleDropdown()">
-                        <span id="selected-value">Все сложности</span>
-                        <svg class="arrow" width="12" height="8" viewBox="0 0 12 8">
+                    <button class="dropdown-btn" 
+                        data-toggle="difficulty-dropdown" 
+                        onclick="toggleDropdown()" 
+                        aria-haspopup="listbox" 
+                        aria-expanded="false" 
+                        aria-controls="difficulty-dropdown-menu">
+                        <span id="selected-value">Все уровни</span>
+                        <svg class="arrow" width="12" height="8" viewBox="0 0 12 8" aria-hidden="true">
                             <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" fill="none"/>
                         </svg>
                     </button> 
-                    <div class="dropdown-menu">
-                        <div class="dropdown-item active" onclick="selectOption(this, 'Все сложности')">
-                            Все сложности
+                    <div class="dropdown-menu" id="dropdown-menu"  role="listbox">
+
+                        <div class="dropdown-item active" 
+                            data-value="Все уровни" 
+                            role="option" 
+                            aria-selected="true"
+                            onclick="selectOption(this, 'Все уровни')">
+                            Все уровни
                         </div>
-                        <div class="dropdown-item" onclick="selectOption(this, 'Легко')">
-                            Легко
+                        <div class="dropdown-item" 
+                            onclick="selectOption(this, 'Начинающий')" 
+                            data-value="beginners" 
+                            role="option"
+                            aria-selected="false">
+                            Начинающий
                         </div>
-                        <div class="dropdown-item" onclick="selectOption(this, 'Средне')">
-                            Средне
+                        <div class="dropdown-item" 
+                            onclick="selectOption(this, 'Средний')" 
+                            data-value="medium" 
+                            role="option"
+                            aria-selected="false">
+                            Средний 
                         </div>
-                        <div class="dropdown-item" onclick="selectOption(this, 'Сложно')">
-                            Сложно
+                        <div class="dropdown-item" 
+                            onclick="selectOption(this, 'Продвинутый')" 
+                            data-value="advanced" 
+                            role="option"
+                            aria-selected="false">
+                            Продвинутый 
                         </div>
-                        <div class="dropdown-item" onclick="selectOption(this, 'Хардкор')">
-                            Хардкор
+                        <div class="dropdown-item" 
+                            onclick="selectOption(this, 'Эксперт')" 
+                            data-value="expert" 
+                            role="option"
+                            aria-selected="false">
+                            Эксперт
                         </div>
                     </div>
                 </div>
+                <div class="catalog-search">
+                    <input class="input-search" type="search" placeholder="Поиск по названию или локации" aria-label="Поиск туров">
+                </div>
+                <button class="search-btn">
+                    <span>Искать</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="10" cy="10" r="7"/>
+                        <line x1="15" y1="15" x2="21" y2="21"/>
+                    </svg>
+                </button>
+
             </div>
         </div>
 
@@ -45,170 +79,186 @@
         <div id="resorts-container" class="resorts-grid">
             <!-- resort cards are generated dynamically via JavaScript; the static prototype below
                  is kept for reference but could be removed in production -->
-            <article class="resorts-card">
-                <div class="card-image-wrapper">
-                    <img src="/static/tours/1tour/krasnayaPolyana.png" alt="Красная поляна, Сочи" loading="lazy">
-                    <div class="resorts-levels" aria-hidden="true"></div>
-                </div>
-                <div class="card-content">
-                    <h2 class="card-title">Красная поляна</h2>
-                    <div class="card-location">
-                        <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                        <span class="location-text">Сочи, ул. Горная Карусель 5</span>
-                    </div>
-
-                    <div class="card-info">
-                        <div class="tour-height">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M8 3l4 8 5-5 5 15H2L8 3z"/>
-                            </svg>
-                            <span class="title">Высота:</span>
-                            <span class="info">2 422–3 813 м</span>
-                        </div>
-
-                        <div class="lifts">
-                            <div class="lifts-header">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                    <path d="M4 10v11h16V10M4 10l8-7 8 7M8 21v-7m8 7v-7"/>
-                                </svg>
-                                <span class="title">Подъемники:</span>
-                            </div>
-                            <div class="lifts-info">
-                                <div class="info">
-                                    <span>Бугельный:</span><span>12</span>
-                                </div>
-                                <div class="info">
-                                    <span>Гондола:</span><span>10</span>
-                                </div>
-                                <div class="info">
-                                    <span>Кресельный:</span><span>5</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="lenght-trails">
-                            <span>Протяженность:</span><span>237 км</span>
-                        </div>
-                        <div class="trails">
-                            <span class="title">Трассы:</span>
-                            <div class="info">
-                                <div class="trails-one">
-                                    <div class="green">
-                                        <div>
-                                            <svg class="trail-dot green" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
-                                                <circle cx="12" cy="12" r="10" fill="#00FF00"/>
-                                            </svg>
-                                            <span class="string">Зеленая:</span>
-                                        </div>
-                                        <span class="count">12</span>
-                                    </div>
-                                    <div class="blue">
-                                        <div>
-                                            <svg class="trail-dot blue" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
-                                                <circle cx="12" cy="12" r="10" fill="blue"/>
-                                            </svg>
-                                            <span class="string">Синяя:</span>
-                                        </div>
-                                        <span class="count">10</span>
-                                    </div>
-                                </div>
-                                <div class="trails-two">
-                                    <div class="red">
-                                        <div>
-                                            <svg class="trail-dot red" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
-                                                <circle cx="12" cy="12" r="10" fill="red"/>
-                                            </svg>
-                                            <span class="string">Красная:</span>
-                                        </div>
-                                        <span class="count">15</span>
-                                    </div>
-                                    <div class="black">
-                                        <div>
-                                            <svg class="trail-dot black" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
-                                                <circle cx="12" cy="12" r="10" fill="black"/>
-                                            </svg>
-                                            <span class="string">Черная:</span>
-                                        </div>
-                                        <span class="count">20</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="costs">
-                            <div class="skiipas-block">
-                                <div>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                        <rect x="3" y="6" width="18" height="12" rx="2"/>
-                                        <path d="M7 10h2m4 0h4M7 14h10"/>
-                                    </svg>
-                                    <span class="skiipas">Скипасс (день):</span>
-                                </div>
-                                <span class="skiipas-cost">4000</span>
-                            </div>
-                            <div class="arenda-block">
-                                <div>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                        <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/>
-                                        <path d="M12 7l-2-2m4 0l-2 2M12 17l-2 2m4 0l-2-2M7 12l-2-2m0 4l2-2M17 12l2-2m0 4l-2-2"/>
-                                    </svg>
-                                    <span class="arend">Аренда (день):</span>
-                                </div>
-                                <span class="arenda-cost">3000</span>
-                            </div>
-                        </div>
-
-                        <div class="season">
-                            <span class="info-bold">сезон:</span>
-                            <span class="info">август‑сентябрь</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-
-
-
             
-
-            <!-- additional cards removed – render via JS using the template below -->
-
         </div>
     </div>
     
 
     <template id="resort-card-template">
-        <article class="resort-card" aria-hidden="true">
+        <article class="resorts-card">
             <div class="card-image-wrapper">
-                <img src="" alt="" class="card-image">
-                <div class="card-badge"></div>
+                <img src="" alt="" loading="lazy" data-field="image">
+                <div class="resorts-levels" aria-hidden="true"></div>
             </div>
             <div class="card-content">
-                <h2 class="card-title"></h2>
-                <p class="card-location">
-                    <svg aria-hidden="true"><!-- иконка локации --></svg>
-                    <span></span>
-                </p>
-                <div class="card-info">
-                    <div class="info-item">
-                        <span class="info-label">Сложность:</span>
-                        <span class="info-value difficulty-badge"></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Высота:</span>
-                        <span class="info-value elevation"></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Трасс:</span>
-                        <span class="info-value trails"></span>
-                    </div>
+                <h2 class="card-title" data-field="card-name"></h2>
+                <div class="card-location">
+                    <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <span class="location-text" data-field="location"></span>
                 </div>
-                <p class="card-description"></p>
-                <div class="card-footer">
-                    <span class="card-price"></span>
-                    <button type="button" class="btn-more">Подробнее</button>
+
+                <div class="card-info">
+                    <div class="hero-info-block">
+                        <p data-field="hero-info">
+                            Олимпийский объект с оборудованием мирового 
+                            класса и потрясающим видом на Черное море. 
+                            Обширная территория подходит для всех уровней подготовки.
+                        </p>
+                    </div>
+                    <div class="info-block">
+                        <div class="info-child-1">
+                            <div class="tour-height">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="None" 
+                                stroke="blue" stroke-width="2" aria-hidden="true">
+                                    <path d="M8 3l4 8 5-5 5 15H2L8 3z"/>
+                                </svg>
+                                <span class="title">Высота курорта</span>
+                                <span class="height-info info" data-field="peak-height"></span>
+                            </div>
+    
+                            <div class="trails">
+                                <svg width="24" height="24" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                                    <polyline points="10,60 25,45 40,55 55,35 70,20" 
+                                                fill="none" 
+                                                stroke="#22c55e" 
+                                                stroke-width="5" 
+                                                stroke-linecap="round" 
+                                                stroke-linejoin="round"/>
+                                    <polyline points="60,20 70,20 70,30" 
+                                                fill="none" 
+                                                stroke="#22c55e" 
+                                                stroke-width="5" 
+                                                stroke-linecap="round" 
+                                                stroke-linejoin="round"/>
+                                </svg>
+    
+                                <span class="title">Количество трасс</span>
+                                <span class="count-trails info" data-field="trail-count"></span>
+    
+                                
+                            
+                                
+                            </div>
+                            
+                            <div class="lenght-trails">
+                                <img src="/static/logos/metr.png" alt="">
+                                <span class="title">Километраж трасс</span><span class="info" data-field="length"></span>
+                            </div>
+                        </div>
+                        <div class="info-child-2">
+                            <p>Вам понравился этот курорт?</p>
+                            <div class="rating-container">
+                                <button class="star-btn" data-value="1">★</button>
+                                <button class="star-btn" data-value="2">★</button>
+                                <button class="star-btn" data-value="3">★</button>
+                                <button class="star-btn" data-value="4">★</button>
+                                <button class="star-btn" data-value="5">★</button>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+
+
+                   
+
+                    <!-- <div class="lifts">
+                        <div class="lifts-header">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M4 10v11h16V10M4 10l8-7 8 7M8 21v-7m8 7v-7"/>
+                            </svg>
+                            <span class="title">Подъемники:</span>
+                        </div>
+                        <div class="lifts-info">
+                            <div class="info">
+                                <span>Бугельный:</span><span data-field="drag-lifts"></span>
+                            </div>
+                            <div class="info">
+                                <span>Гондола:</span><span data-field="gondola-lifts"></span>
+                            </div>
+                            <div class="info">
+                                <span>Кресельный:</span><span data-field="chair-lifts"></span>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="trails">
+                        <span class="title">Трассы:</span>
+                        <div class="info">
+                            <div class="trails-one">
+                                <div class="green">
+                                    <div>
+                                        <svg class="trail-dot green" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10" fill="#00FF00"/>
+                                        </svg>
+                                        <span class="string">Зеленая:</span>
+                                    </div>
+                                    <span class="count" data-field="green-count"></span>
+                                </div>
+                                <div class="blue">
+                                    <div>
+                                        <svg class="trail-dot blue" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10" fill="blue"/>
+                                        </svg>
+                                        <span class="string">Синяя:</span>
+                                    </div>
+                                    <span class="count" data-field="blue-count"></span>
+                                </div>
+                            </div>
+                            <div class="trails-two">
+                                <div class="red">
+                                    <div>
+                                        <svg class="trail-dot red" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10" fill="red"/>
+                                        </svg>
+                                        <span class="string">Красная:</span>
+                                    </div>
+                                    <span class="count" data-field="red-count"></span>
+                                </div>
+                                <div class="black">
+                                    <div>
+                                        <svg class="trail-dot black" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+                                            <circle cx="12" cy="12" r="10" fill="black"/>
+                                        </svg>
+                                        <span class="string">Черная:</span>
+                                    </div>
+                                    <span class="count" data-field="black-count"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="season">
+                            <span class="info-bold">сезон:</span>
+                            <span class="info" data-field="season"></span>
+                        </div>
+
+                    <div class="costs">
+                        <div class="skiipas-block">
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <rect x="3" y="6" width="18" height="12" rx="2"/>
+                                    <path d="M7 10h2m4 0h4M7 14h10"/>
+                                </svg>
+                                <span class="skiipas">Скипасс (день):</span>
+                            </div>
+                            <span class="skiipas-cost" data-field="skiipas-cost"></span>
+                        </div>
+                        <div class="arenda-block">
+                            <div>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/>
+                                    <path d="M12 7l-2-2m4 0l-2 2M12 17l-2 2m4 0l-2-2M7 12l-2-2m0 4l2-2M17 12l2-2m0 4l-2-2"/>
+                                </svg>
+                                <span class="arend">Аренда (день):</span>
+                            </div>
+                            <span class="arenda-cost" data-field="rent-cost"></span>
+                        </div>
+                    </div> -->
+
+                    
                 </div>
             </div>
         </article>
@@ -216,4 +266,5 @@
 
 </div>
 
-<script src="/static/JS/catalog.js"></script>
+<!-- <script src="/static/JS/catalog.js"></script> -->
+<script src="/static/JS/resorts.js"></script>

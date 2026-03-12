@@ -2,6 +2,7 @@
 // url - адрес сервера, data - данные для отправки
 console.log("Скрипт успешно загружен!");
 
+let isAuthenticated = false;
 
 async function postData(url, data) {
     const response = await fetch(url, {
@@ -216,7 +217,7 @@ document.querySelector('.makeAcc-btn').addEventListener('click', async function(
 });
 
 // Функция для проверки состояния авторизации пользователя
-function checkAuth() {
+async function checkAuth() {
     // Получаем токен доступа из localStorage
     let token = localStorage.getItem('access_token');
 
@@ -241,6 +242,8 @@ function checkAuth() {
         localStorage.removeItem('access_token');
         token = null;
     }
+
+    isAuthenticated = !!token; // Преобразуем в булево значение
     
     // Обновляем видимость кнопок
     if (token) {
@@ -251,8 +254,14 @@ function checkAuth() {
         console.log('❌ Пользователь не авторизован - показываем кнопку логина');
         userButtonsContainer.classList.add('hidden');
         btnLogIn.classList.remove('hidden');
-    }
-}
+    };
+
+    document.dispatchEvent(new CustomEvent('auth:changed', {
+        detail: { isAuthenticated: isAuthenticated }
+    }));
+
+    return isAuthenticated
+};
 
 // Функция для проверки валидности JWT токена
 function isTokenValid(token) {
@@ -268,7 +277,7 @@ function isTokenValid(token) {
         // Если произошла ошибка при разборе токена - считаем его невалидным
         return false;
     }
-}
+};
 
 // Находим кнопку выхода и добавляем обработчик клика
 document.querySelector('.btn-logout').addEventListener('click', function() {

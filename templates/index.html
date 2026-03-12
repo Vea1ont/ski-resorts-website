@@ -1,0 +1,65 @@
+
+
+{% extends "base.html" %}
+
+
+{% block content %}
+<main>
+
+    <section id="main-sec" class="main-section">
+        <!-- <img class="background-image" src="static/photo/pexels-pixabay-355747.jpg" alt="background-mountain"> -->
+
+        <div id="hero" class="hero-block">
+            <h1>Лучшие курорты России</h1>
+            <h2>Горы. Скорость. Зима.</h2>
+            <h3>Горные курорты России - это скорость, свобода и настоящие зимние приключения.
+                Мы подобрали лучшие горнолыжные туры 
+                от Кавказа до Сибири,
+                чтобы вы могли сосредоточиться на катании, а не планировать.
+            </h3>
+            <button class="btn-watch">
+                Смотреть
+            </button>
+        </div>
+
+        <div id="log" class="log-block hidden">
+            <h3>LOGIN</h3>
+            <input id="in-log"  type="text" placeholder="Email" />
+            <input id="in-pass" type="password" placeholder="Password" />
+            <button class="btn-login">LOGIN</button>     
+            <button class="btn-or-register">Or Register</button>              
+        </div>
+
+        
+        <div id="register" class="register-block hidden">
+            <h3>REGISTER</h3>
+            <input type="text" id="nikname" placeholder=" Nikname">
+            <input type="text" id="email" placeholder=" Email">
+            <input type="text" id="age" placeholder=" Your age">
+            <input type="text" id="pass" placeholder=" Password">
+            <input type="text" id="againpass" placeholder=" Confirm password">
+            <button class="makeAcc-btn">MAKE ACC</button>
+            <button class="btn-or-login">Or login</button>              
+        </div>
+        <div class="angle-scroll-block">
+            <img class="angle-scroll" src="/static/logos/angle/white-angle.png" alt="#">    
+            <img class="angle-scroll" src="/static/logos/angle/white-angle.png" alt="#">                                                    
+            <img class="angle-scroll" src="/static/logos/angle/white-angle.png" alt="#">    
+        </div>
+    </section>
+
+    {% include "catalog.html" %}
+    
+
+</main>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="/static/JS/scripts.js"></script>
+<script src="/static/JS/btn.js"></script>
+<script src="/static/JS/carousel.js" defer></script>
+
+{% endblock %}

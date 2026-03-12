@@ -1,9 +1,9 @@
 from fastapi import APIRouter, HTTPException, Request
 
-from app.db import database
+
 from app.models import Register, LogIn
 from app.security import hash_password, verify_password, create_jwt_token
-from app.crud import create_user, update_last_login, get_user_by_email
+from app.crud.crud_users import create_user, update_last_login, get_user_by_email
 
 
 router = APIRouter(prefix="/auth", tags=["Auth"])

@@ -1,11 +1,196 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% block content %}
+<section class="first-tour">    
+    <div class="info-block">
+        <div class="info-text-block">
+            <div class="info-main-text">
+                <h2>КРАСНАЯ ПОЛЯНА</h2>
+            </div>
+        
+            <p>Крупный всесезонный горнолыжный курорт в Сочи у подножия Кавказских гор. 
+                Зимний сезон — с декабря по май, с перепадом высот трасс примерно от 540 м до 2 170 
+                м над уровнем моря. Это дает удобные склоны для новичков и опытных лыжников.</p>
+            
+            <p class="bold-text">Цены ориентировочно:</p>
+            
+            <p>• Однодневный ски-пасс — 3 900–5 000 ₽ для взрослых, дешевле для детей.</p>
+            
+
+            <button id="tour-btn-id-1" class="tour-detail-btn">Подробнее</button>
+
+        </div>
+        <div class="carousel">
+            <div class="slide">
+                <img src="" alt="Красная поляна">
+            </div>
+            <div class="slide">
+                <!-- <img src="/static/tours/1tour/trailsInKrasnaya.png" alt="Trails"> -->
+            </div>
+            <div class="slide active">
+                <!-- <img src="/static/tours/1tour/mountain.png" alt="raiders"> -->
+            </div>
+
+            <div class="carousel-indicators"></div>
+        </div>
+    </div>
+</section>
+
+<section class="second-tour">
+    <div class="info-block">
+        <div class="info-text-block">
+            <div class="info-main-text">
+                <h2>ДОМБАЙ</h2>
+            </div>
+
+            <p>Один из самых живописных курортов Северного Кавказа в долине реки Аманауз у подножия горы Мусса-Ачитара. Зимний сезон — с декабря по апрель, перепад высот от ~1 600 м до ~3 000 м над уровнем моря. Трассы разной сложности, включая легендарный склон «Маруха» для фрирайда.</p>
+
+            <p class="bold-text">Цены ориентировочно:</p>
+            
+            <p>• Однодневный ски-пасс — 2 800–3 500 ₽ для взрослых.</p>
+            
+            <button id="tour-btn-id-2" class="tour-detail-btn">Подробнее</button>
+        </div>   
+        
+        <div class="carousel">
+            <div class="slide active">
+                <img src="/static/tours/2tour/image.png" alt="Dombai1">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/2tour/image copy.png"  alt="Dombai2">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/2tour/image copy 2.png" alt="Dombai2">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/2tour/image copy 3.png" alt="Dombai3">
+            </div>
+
+            
+            <div class="carousel-indicators"></div>
+        </div>
+    </div>
+
+</section>
+
+<section class="third-tour">
+    <div class="info-block">
+        <div class="info-text-block">
+            <div class="info-main-text">
+                <h2>Приэльбрусье</h2> 
+            </div>
+
+            <p>Крупнейший горнолыжный комплекс России у подножия горы Эльбрус. Сезон длится с ноября по май благодаря высокогорному расположению. Перепад высот — от ~2 000 м до ~3 847 м (с подъёмом на «Приют 11»). Идеален для продвинутых лыжников и сноубордистов.</p>
+
+            <p class="bold-text">Цены ориентировочно:</p>
+
+            <p>• Однодневный ски-пасс — 3 200–4 200 ₽.</p>
+
+            
+            <button id="tour-btn-id-3" class="tour-detail-btn">Подробнее</button>
+        </div>
+        
+        <div class="carousel">
+            <div class="slide active">
+                <img src="/static/tours/3tour/image.png" alt="PriElbrus">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/3tour/image copy.png"  alt="PriElbrus2">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/3tour/image copy 2.png" alt="PriElbrus3">
+            </div>
+            
+            <div class="carousel-indicators"></div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="fourth-tour">
+    <div class="info-block">
+        <div class="info-text-block">
+            <div class="info-main-text">
+                <h2>Шерегеш</h2>
+            </div>
+
+            <p>Сибирская «Мекка» для сноубордистов и любителей целины в Горной Шории. Сезон — с ноября по апрель. Перепад высот трасс от ~1 250 м до ~1 850 м. Славится обильными снегопадами (до 5 м за сезон) и возможностью фрирайда вне трасс.</p>
+
+
+            <p class="bold-text">Цены ориентировочно:</p>
+
+            <p>• Однодневный ски-пасс — 2 500–3 300 ₽.</p>
+
+            <p>• Ночные спуски и многодневные карты дешевле.</p>
+            
+            <button id="tour-btn-id-4" class="tour-detail-btn">Подробнее</button>
+
+            
+
+        </div>
+
+        <div class="carousel">
+            <div class="slide active">
+                <img src="/static/tours/4tour/image.png" alt="Sheregesh">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/4tour/image copy.png"  alt="Sheregesh2">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/4tour/image copy 2.png" alt="Sheregesh3">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/4tour/image copy 3.png" alt="Sheregesh4">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/4tour/image copy 4.png" alt="Sheregesh5">
+            </div>
+            
+            <div class="carousel-indicators"></div>
+        </div>
+
+    </div>
     
-</body>
-</html>
+</section>
+
+<section class="fiveth-tour">
+    <div class="info-block">
+        <div class="info-text-block">
+            <div class="info-main-text">
+                <h2>Роза Хутор</h2>
+            </div>
+
+            <p>Олимпийский курорт с развитой инфраструктурой и самой длинной трассой в России («Эсто-Садовая», 6 км). Сезон — с декабря по апрель. Перепад высот от ~560 м до ~2 320 м. Подходит всем уровням подготовки, включая профессиональные трассы Красной поляны.</p>
+
+
+            <p class="bold-text">Цены ориентировочно:</p>
+
+            <p>• Однодневный ски-пасс — 4 200–5 500 ₽.</p>
+
+
+            <button id="tour-btn-id-5" class="tour-detail-btn">Подробнее</button>
+        </div>
+
+        <div class="carousel">
+            <div class="slide active">
+                <img src="/static/tours/5tour/image.png" alt="Roza">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/5tour/image copy.png"  alt="Roza2">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/5tour/image copy 2.png" alt="Roza3">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/5tour/image copy 3.png" alt="Roza4">
+            </div>
+            <div class="slide">
+                <img src="/static/tours/5tour/image copy 4.png" alt="Roza">
+            </div>
+            
+            <div class="carousel-indicators"></div>
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}

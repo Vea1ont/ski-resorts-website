@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
+
+from app.core.templates import templates
 
 router_profile = APIRouter()
-templates = Jinja2Templates(directory="templates")
 
 @router_profile.get("/profile", response_class=HTMLResponse)
 async def profile_page(request: Request):

@@ -1,66 +1,51 @@
+from app.db import database
+from typing import Dict, Any
 
+async def create_resort(data: Dict[str, Any]):
     
-    
-async def create_resort(
-    image=None, 
-    name=None,
-    city=None,
-    address=None,
-    min_height=None,
-    max_height=None,
-    drag_lifts=0,
-    gondola_lifts=0,
-    chair_lifts=0,
-    length=None,
-    green_trails=0,
-    blue_trails=0,
-    red_trails=0,
-    black_trails=0,
-    ski_pass=None,
-    rent=None,
-    season_start=None,
-    season_end=None
-    ):
     query= """
         INSERT INTO resorts_card (
             image, 
             name,
             city,
             address,
-            min_height,
-            max_height,
-            drag_lifts,
-            gondola_lifts,
-            chair_lifts,
             length,
-            green_trails,
-            blue_trails,
-            red_trails,
-            black_trails,
-            ski_pass,
-            rent,
-            season_start,
-            season_end
+            count_trails,
+            card_hero_info,
+            peak_height,
+            beginners,
+            medium,
+            advanced,
+            expert
+            
         ) VALUES (
             $1, $2, $3, $4, $5, $6, 
-            $7, $8, $9, $10, $11, $12, $13, 
-            $14, $15, $16, $17, $18
+            $7, $8, $9, $10, $11, $12
             )
     """
     async with database.pool.acquire() as conn:
         await conn.execute(
-            query, name, city, image, address, min_height, max_height,
-            drag_lifts, gondola_lifts, chair_lifts, length,
-            green_trails, blue_trails, red_trails, black_trails,
-            ski_pass, rent, season_start, season_end
+            query,
+            data['image'],
+            data['name'],
+            data['city'],
+            data['address'],
+            data['length'],
+            data['count_trails'],
+            data.get('card_hero_info'),
+            data['peak_height'],
+            data['beginners'],
+            data['medium'],
+            data['advanced'],
+            data['expert']
         )
         
-async def get_all_resorts():
+async def fetch_all_resorts():
     query = 'SELECT * FROM "resorts_card"'
     async with database.pool.acquire() as conn:
         return await conn.fetch(query)
     
-async def get_resort_by_id(resort_id):
+async def fetch_resort_by_id(resort_id):
     query = 'SELECT * FROM "resorts_card" WHERE id = $1'
     async with database.pool.acquire() as conn:
         return await conn.fetchrow(query, resort_id)

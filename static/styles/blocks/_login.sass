@@ -1,6 +1,8 @@
+@use "../../variables"
+    
 @mixin inputs
     border: 1px solid #4d92fa
-    border-radius: 5px
+    border-radius: variables.$br
     width: 350px
     height: 35px
     padding-left: 10px
@@ -10,7 +12,7 @@
 .log-block
     transform: translate(0, -50%)
     background-color: rgba(0, 0, 0, 0.5)
-    border-radius: $br
+    border-radius: variables.$br
     max-width: 450px
     @media (min-width: 650px)
         width: 350px
@@ -62,7 +64,7 @@
     background-color: black
     font-family: 'Quicksand'
     border: 0
-    border-radius: 40px
+    border-radius: variables.$br
     width: 125px
     height: 35px
     margin-top: 10px

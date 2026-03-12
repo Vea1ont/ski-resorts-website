@@ -1,11 +1,4 @@
-$main-black: #000000
-$main-white: #ffffff
-$gray: #a0a0a0
-$dark-gray: #202225
-$light-blue: #4d92fa 
-$color-hello-text: black  
-$br: 8px
-$animation-delay: 1s
+@use "../../variables"
 
 @mixin btn-hover
     background: linear-gradient(45deg, #2575fc, #6a11cb)
@@ -28,7 +21,7 @@ $animation-delay: 1s
     width: 39px
     height: 39px
     line-height: 39px
-    border-radius: $br
+    border-radius: variables.$br
     border: 0
     cursor: pointer
     margin-left: 8px
@@ -61,7 +54,7 @@ header
     margin-top: 10px
     padding: 10px 
     width: 100%
-    background-color: $dark-gray
+    background-color:  #1f283b
     border-radius: 20px
     
 .z
@@ -69,12 +62,12 @@ header
     border: 0
     height: 39px
     width: 39px
-    border-radius: $br
+    border-radius: variables.$br
     color: black
     background-color: black
 
     img
-        border-radius: $br
+        border-radius: variables.$br
         width: 39px
         object-fit: cover
 
@@ -96,7 +89,7 @@ header
     
     .nav-links li a
         text-decoration: none
-        color: $gray
+        color: variables.$gray
         &:hover 
             color: #ff00ff
         
@@ -107,7 +100,7 @@ header
     align-items: center
 
     button
-        border-radius: $br
+        border-radius: variables.$br
 
     .nav-icons a
         text-decoration: none
@@ -117,13 +110,13 @@ header
     
 .btn-log-in
     text-decoration: none
-    background-color: $main-black
-    color: $main-white
+    background-color: #0B1325
+    color: white
     width: 100px
     height: 39px
     line-height: 39px
     text-align: center
-    border-radius: $br
+    border-radius: variables.$br
     border: 0
     font-family: 'Quicksand'
     font-size: 15px

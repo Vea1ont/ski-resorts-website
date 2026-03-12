@@ -1,17 +1,8 @@
+@use "../../variables"
+
 @use "_fonts"
 
-@mixin hello-txt
-    text-align: center
-    color: $color-hello-text
-    font-family: 'SPT-extralight'
-    margin: 0 auto
-    
-@mixin sections
-    display: flex
-    height: calc(100vh - 60px)
-    width: 100%
-    justify-content: center
-    align-items: center
+
 
 .background-image
     position: absolute
@@ -135,7 +126,7 @@ main
     button
         margin-top: 20px
         border: none
-        border-radius: $br
+        border-radius: variables.$br
         height:80px
         width: 280px
         color: white

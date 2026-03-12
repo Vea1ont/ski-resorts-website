@@ -1,13 +1,14 @@
+@use "../../variables"
+    
 @use "_header"
 
 @use "_fonts"
 
+
 @mixin hello-txt
     text-align: center
-    color: $color-hello-text
-    font-family: 'Nimbus-Ultra-Light'
+    color: variables.$color-hello-text
     margin: 0 auto
-
 
 @keyframes fadeIn 
     0%  
@@ -18,7 +19,7 @@
 
 
 .hero-block
-    transform: translate(0, -40%)
+    transform: translate(0, -30%)
     background-color: rgba(255, 255, 255, 0.8)
     border-radius: 20px
     max-width: 650px
@@ -30,24 +31,26 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1)
 
     text-align: center
+    align-items: center
 
     display: flex
     flex-direction: column
-    align-items: center
     gap: 15px
 
     h1
-        @include hello-txt
+        +variables.hello-txt
         font-size: 50px
         font-weight: 100
         padding-top: 20px
     
     h2
-        @include hello-txt
+        +variables.hello-txt
+        
         color: blue
 
     h3
-        @include hello-txt
+        +variables.hello-txt
+        
         padding-top: 20px
   
 
@@ -56,17 +59,16 @@
     animation: fadeIn 0.4s ease-in forwards
 
 .btn-watch
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex
+    justify-content: center
+    align-items: center
     font-size: 30px
-    font-family: 'Nimbus-Medium'
     border: none
-    border-radius: $br
+    border-radius: variables.$br
     height: 55px
     width: 180px
     color: white
-    background-color: blue
+    background-color: #1541ED
     margin-top: 20px
     cursor: pointer
     padding: 0
