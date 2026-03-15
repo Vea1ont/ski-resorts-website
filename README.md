@@ -2,7 +2,7 @@ Ski Resorts Russia
 
 Веб-платформа для поиска и обзора горнолыжных курортов России. Проект объединяет информацию о трассах от Кавказа до Сибири, помогая райдерам выбрать идеальное место для катания.
 
-![Main Preview](https://github.com/Vea1ont/ski-resorts-website/blob/main/screens/image_1deda1.jpg?raw=true) 
+![Main Preview](https://github.com/Vea1ont/ski-resorts-website/blob/main/static/screenshots/main.png?raw=true) 
 
 Текущий функционал
 - **Интерактивный каталог:** Просмотр списка курортов с описанием, локацией и ключевыми характеристиками.
