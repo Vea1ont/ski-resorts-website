@@ -1,7 +1,8 @@
 import asyncpg
 import os
-
+from sqlalchemy import create_engine
 from dotenv import load_dotenv
+from sqlalchemy.ext.declarative import declarative_base
 
 load_dotenv()
 
@@ -19,3 +20,7 @@ class Postgres:
         if self.pool:  # Проверяем существование
             await self.pool.close()
 database = Postgres(DATABASE_URL)
+
+admin_engine = create_engine(DATABASE_URL)
+
+Base = declarative_base()

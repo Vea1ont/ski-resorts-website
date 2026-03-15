@@ -1,3 +1,5 @@
+import os
+
 import uvicorn
 
 from fastapi import FastAPI, HTTPException, Request
@@ -5,16 +7,24 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
-from app.db import database
 
-
+from app.db import database, admin_engine
 from app.routers import auth
 from app.routers import profile
 from app.routers import catalog
 from app.routers import resorts
-
 from app.core.templates import templates
 
+from app.admin.auth import AdminAuth
+from app.admin.admin_viwers import ResortAdmin
+
+from sqladmin import Admin
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # logfire.configure()
 
@@ -25,6 +35,14 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # logfire.instrument_fastapi(app)
 
+admin = Admin(
+    app,
+    admin_engine,
+    authentication_backend=AdminAuth(SECRET_KEY),
+    base_url="/adminka"
+)
+
+admin.add_view(ResortAdmin)
 
 app.add_middleware(
     CORSMiddleware,

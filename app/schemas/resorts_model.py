@@ -13,7 +13,7 @@ class ResortCreate(BaseModel):
     length: int = 0
     
     count_trails: int = 0
-    max_height: int = 0
+    peak_height: int = 0
 
     beginner: bool = False
     medium: bool = False
