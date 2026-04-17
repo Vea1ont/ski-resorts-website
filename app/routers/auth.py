@@ -3,8 +3,12 @@ from fastapi import APIRouter, HTTPException, Request
 
 from app.models import Register, LogIn
 from app.security import hash_password, verify_password, create_jwt_token
-from app.crud.crud_users import create_user, update_last_login, get_user_by_email
+from app.crud.crud_users import create_user, update_last_login, get_user_by_email, get_user_by_id
+from app.security import decode_token, auth2_scheme
 
+from fastapi import Depends, status, HTTPException
+
+from app.routers.users import get_current_user
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
@@ -27,5 +31,3 @@ async def login(user: LogIn, request: Request):
     token = create_jwt_token({"sub": db_user["email"], "user_id": db_user["id"]})
     
     return {"access_token": token, "token_type": "bearer", "user_id": db_user["id"], "email": db_user["id"]}  
-
-  

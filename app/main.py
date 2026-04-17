@@ -9,14 +9,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 
 from app.db import database, admin_engine
-from app.routers import auth
-from app.routers import profile
-from app.routers import catalog
-from app.routers import resorts
+from app.routers import auth, profile, catalog, resorts, reviews, about
+
 from app.core.templates import templates
 
 from app.admin.auth import AdminAuth
-from app.admin.admin_viwers import ResortAdmin
+from app.admin.admin_viwers import ResortAdmin, ResortViewers
 
 from sqladmin import Admin
 
@@ -43,6 +41,7 @@ admin = Admin(
 )
 
 admin.add_view(ResortAdmin)
+admin.add_view(ResortViewers)
 
 app.add_middleware(
     CORSMiddleware,
@@ -59,7 +58,8 @@ app.include_router(auth.router)
 app.include_router(profile.router_profile)
 app.include_router(catalog.router_tour)
 app.include_router(resorts.router_resorts)
-
+app.include_router(reviews.router)
+app.include_router(about.about_router)
 # templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)

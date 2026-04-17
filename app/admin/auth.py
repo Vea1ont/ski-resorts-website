@@ -1,6 +1,6 @@
 from sqladmin.authentication import AuthenticationBackend
 from starlette.requests import Request
-
+from fastapi import Response
 
 class AdminAuth(AuthenticationBackend):
 
@@ -18,7 +18,9 @@ class AdminAuth(AuthenticationBackend):
 
 
     async def logout(self, request: Request):
-        request.session.clear()
+        
+        response.delete_cookie(key="token")  # <-- имя cookie должно совпадать
+        return {"msg": "logged out"}
 
 
     async def authenticate(self, request: Request):

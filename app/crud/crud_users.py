@@ -26,3 +26,20 @@ async def update_last_login(user_id, ip, user_agent):
     """
     async with database.pool.acquire() as connection:
         await connection.execute(query, ip, user_agent, user_id)
+        
+async def get_users_from_db(pool):
+    query = "SELECT id, name, email FROM users"
+    async with pool.acquire() as connection:
+        rows = await connection.fetch(query)
+        return rows
+    
+async def get_user_by_id(user_id):
+    query = "SELECT id, name, email FROM users WHERE id = $1"
+    async with database.pool.acquire() as connection:
+        user = await connection.fetchrow(query, user_id)
+        return user
+
+async def delete_user(user_id):
+    query = "DELETE FROM users WHERE id = $1"
+    async with database.pool.acquire() as connection:
+        await connection.execute(query, user_id)

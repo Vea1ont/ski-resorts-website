@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 class Users(BaseModel):
     id: int
@@ -15,3 +15,14 @@ class LogIn(BaseModel):
     email: str
     password: str
     
+class ReviewsCreate(BaseModel):
+    product_id: int
+    rating: int = Field(ge=1, le=5)  
+    comment: str
+
+class ReviewRead(ReviewsCreate):
+    id: int
+    is_approved: bool
+    
+    class Config:
+        from_attributes = True

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZTour</title>
-
+    <title>SkiSpot</title>
+    <link rel="icon" type="image/png" href="/static/logos/mountain/favicon.png">
     <link rel="stylesheet" href="/static/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,30 +19,30 @@
             <nav class="nav-bar">
                 <div class="left-section">
 
-                    <button class="z" onclick="showMain()" >
-                        <img src="/static/logos/ztype.png" alt="z">
+                    <!-- <button class="z" onclick="showMain()" > -->
+                        <!-- <img src="/static/logos/ztype.png" alt="z"> -->
+                    <!-- </button> -->
+                    <button class="ski-spot" onclick="showMain()">
+                        <img src="/static/logos/mountain/white-soft-mountain.png" alt="main-logo">
+                        SkiSpot
                     </button>
-
                     <ul class="nav-links">
-                        <li><a href="/">Home</a></li> 
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Documentation</a></li>
+                        <li><a href="/">Главная</a></li> 
+                        <li><a href="/about">О проекте</a></li>
                     </ul>
                 </div>
                 
                 <div class="right-section">
-                    <div class="nav-icons">
+                    <!-- <div class="nav-icons">
                         <a href="#"><img src="/static/logos/image_2025-10-16_20-47-38.png"></a>
                         <a href="#"><img src="/static/logos/image_2025-10-16_20-47-28.png"></a>
                         <a href="#"><img src="/static/logos/image_2025-10-16_20-47-47.png"></a>
-                    </div>
+                    </div> -->
                     
                     <button class="btn-log-in">Log in</button>
                     
                     <div class="user-buttons-container hidden">
-                        <button class="btn-profile" onclick="window.location.href='/profile'">
+                        <button class="btn-profile">
                             <img src="/static/logos/profile/image copy.png">
                         </button>
 
@@ -58,7 +58,10 @@
     {% block content %}
     {% endblock %}
 
-    {% block scripts %}{% endblock %}
+    <script type="module" src="/static/JS/scripts.js"></script>
+
+    {% block scripts %}
+    {% endblock %}
 
 </body>
 </html>

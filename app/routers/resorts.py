@@ -23,7 +23,7 @@ async def get_all_resorts(
     resorts = [dict(r) for r in resorts]
     
     if difficulty == "beginners":
-        resorts = [r for r in resorts if r["beginner"]]
+        resorts = [r for r in resorts if r["beginners"]]
     elif difficulty == "medium":
         resorts = [r for r in resorts if r["medium"]]
     elif difficulty == "advanced":

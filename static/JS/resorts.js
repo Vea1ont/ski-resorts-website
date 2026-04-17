@@ -1,5 +1,6 @@
+import { checkAuth } from "./auth.js"; 
 
-
+let isAuthenticated = false;
 
 function toggleDropdown() {
     const menu = document.querySelector('.dropdown-menu');
@@ -7,6 +8,12 @@ function toggleDropdown() {
 
     menu.classList.toggle('show');
     btn.classList.toggle('active');
+}
+
+const dropdownBtn = document.querySelector('.dropdown-btn');
+
+if (dropdownBtn) {
+    dropdownBtn.addEventListener('click', toggleDropdown);
 }
 
 
@@ -21,7 +28,7 @@ function selectOption(element, value) {
     element.setAttribute('aria-selected', 'true');
 
     document.getElementById('selected-value').textContent = value;
-    document.getElementById('dropdown-menu').classList.remove('show');
+    document.querySelector('.dropdown-menu').classList.remove('show');
     document.querySelector('.dropdown-btn').classList.remove('active');
 
     selectedDifficulty = element.dataset.value;
@@ -32,27 +39,27 @@ function selectOption(element, value) {
 
     loadResorts(selectedDifficulty);
 }
-
+document.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+        selectOption(e.target, e.target.textContent);
+    });
+});
 document.addEventListener('click', function(event) {
-  const dropdown = document.querySelector('.dropdown');
-  if (!dropdown.contains(event.target)) {
-    document.querySelector('.dropdown-menu').classList.remove('show');
-    document.querySelector('.dropdown-btn').classList.remove('active');
-  }
+    const dropdown = document.querySelector('.dropdown');
+    if (!dropdown) return;
+
+    if (!dropdown.contains(event.target)) {
+        document.querySelector('.dropdown-menu')?.classList.remove('show');
+        document.querySelector('.dropdown-btn')?.classList.remove('active');
+    }
 });
 
 
 
 
 const template = document.getElementById('resort-card-template');
-
-if (!template) {
-    console.error('Шаблон #resort-card-template не найден в HTML!');
-}
-
-
-
 function createResortCard(resort) {
+    if (!template) return null;
 
     const clone = template.content.cloneNode(true);
 
@@ -61,6 +68,16 @@ function createResortCard(resort) {
 
     if (resort.id) {
         card.dataset.resortId = resort.id;
+    }
+
+    card.dataset.resort = JSON.stringify(resort);
+
+    if (typeof isAuthenticated !== 'undefined' && isAuthenticated) {
+        const button = document.createElement('button');
+        button.className = 'open-modal-btn';
+        button.textContent = 'Оставить отзыв';
+        button.addEventListener('click', () => openModal(resort));
+        clone.querySelector('.info-child-2').appendChild(button);
     }
 
     clone.querySelector('[data-field="image"]').alt = resort.name;
@@ -113,16 +130,11 @@ function createResortCard(resort) {
     return clone;
 }
 
-const searchBtn = document.querySelector('.search-btn');
-const searchInput = document.querySelector('.input-search');
 
-let selectedDifficulty = null;
 
-searchBtn.addEventListener('click', () => loadResorts());
 
 async function loadResorts(difficulty = null) {
-
-    const search = searchInput.value
+    const search = searchInput ? searchInput.value : '';
 
     let url = '/resorts/';
     const params = [];
@@ -175,23 +187,127 @@ async function loadResorts(difficulty = null) {
     }
 }
 
-searchInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-        loadResorts(selectedDifficulty);
+const searchBtn = document.querySelector('.search-btn');
+const searchInput = document.querySelector('.input-search');
+
+let selectedDifficulty = null;
+
+if (searchBtn) {
+    searchBtn.addEventListener('click', () => loadResorts());
+}
+
+if (searchInput) {
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            loadResorts(selectedDifficulty);
+        }
+    });
+}
+
+const reviewTemplate = document.getElementById('reviews-card-template');
+const starTemplate = document.getElementById('star-template');
+
+if (!reviewTemplate) {
+    console.error('Шаблон #reviews-card-template не найден!');
+}
+
+function createReviewCard(review) {
+    const clone = reviewTemplate.content.cloneNode(true);
+
+    // Название курорта
+    clone.querySelector('[data-field="review-name"]').textContent = review.resort_name;
+
+    // Локация
+    clone.querySelector('[data-field="review-location"]').textContent =
+        `${review.resort_city}${review.resort_address ? ', ' + review.resort_address : ''}`;
+
+    // Комментарий
+    clone.querySelector('[data-field="review-comment"]').textContent = review.comment;
+
+    // Дата
+    clone.querySelector('[data-field="review-date"]').textContent = formatDate(review.created_at);
+
+    // ⭐ Рейтинг
+    const starsWrapper = clone.querySelector('[data-field="stars-wrapper"]');
+    starsWrapper.innerHTML = '';
+
+    for (let i = 0; i < review.rating; i++) {
+        const star = starTemplate.content.cloneNode(true);
+        starsWrapper.appendChild(star);
     }
-});
+
+    return clone;
+}
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString('ru-RU', {
+        year: 'numeric',
+        month: 'long'
+    });
+}
 
 
+export async function loadReviews() {
+    const container = document.querySelector('.profile-card__reviews_grid');
+    console.log("Запрос пошел!");
 
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Проверяем текущий статус (если scripts.js уже выполнил checkAuth)
-    if (typeof isAuthenticated !== 'undefined' && isAuthenticated) {
-        RatingModule.enable();
+    if (!container) return;
+
+    if (!reviewTemplate || !starTemplate) {
+        console.error('Шаблон #reviews-card-template или #star-template не найден!');
+        return;
     }
-    
-    // 2. Загружаем курорты
-    loadResorts();
-});
+
+    try {
+        const token = localStorage.getItem('access_token');
+        const response = await fetch('/reviews/', {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        const reviews = data.reviews ?? [];
+
+        container.innerHTML = '';
+
+        if (reviews.length === 0) {
+            container.innerHTML = '<p>У вас пока нет отзывов</p>';
+            return;
+        }
+
+        reviews.forEach(review => {
+            const card = createReviewCard(review);
+            container.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error('Ошибка загрузки отзывов:', error);
+    }
+}
+
+function showAuthMessage(star) {
+    const container = star.closest('.rating-container');
+    if (!container) return;
+
+    container.classList.add('hidden-stars');
+    container.querySelector('.auth-message')?.classList.add('visible');
+}
+
+function hideAuthMessage(star) {
+    const container = star.closest('.rating-container');
+    if (!container) return;
+
+    container.classList.remove('hidden-stars');
+    container.querySelector('.auth-message')?.classList.remove('visible');
+}
 
 
 document.addEventListener('click', (e) => {
@@ -199,7 +315,7 @@ document.addEventListener('click', (e) => {
     if (!star) return; 
 
     if (!RatingModule.canRate()) {
-        showAuthTooltip(star); // Показываем "Авторизуйтесь"
+        showAuthMessage(star); 
         return;
     }
     const container = star.closest('.rating-container');
@@ -226,7 +342,7 @@ document.addEventListener('click', (e) => {
         
         card.dataset.userRating = rating;
         
-        console.log(`✅ Оценка ${rating} сохранена для курорта ${resortId}`);
+        console.log(`Оценка ${rating} сохранена для курорта ${resortId}`);
     }
 
     console.log(`Оценка ${rating} для курорта`, container.closest('.resorts-card'));
@@ -235,51 +351,45 @@ document.addEventListener('click', (e) => {
 document.addEventListener('mouseover', (e) => {
     const star = e.target.closest('.star-btn');
     if (!star) return;
+
+    const container = star.closest('.rating-container');
+    if (!container) return;
+
     if (!RatingModule.canRate()) {
-        showAuthTooltip(star); // Показываем "Авторизуйтесь"
+        showAuthMessage(star);
         return;
     }
 
     const rating = parseInt(star.dataset.value);
-    const container = star.closest('.rating-container');
-    if (!container) return;
-
     container.querySelectorAll('.star-btn').forEach(btn => {
         const val = parseInt(btn.dataset.value);
         btn.classList.toggle('active', val <= rating);
     });
-}, true); 
+});
 
 document.addEventListener('mouseout', (e) => {
-    const star = e.target.closest('.star-btn');
-    if (!star) return;
+    const container = e.target.closest('.rating-container');
+    if (!container) return;
+
+    if (container.contains(e.relatedTarget)) return;
 
     if (!RatingModule.canRate()) {
-        hideAuthTooltip(); // Добавьте эту функцию, если есть
+        hideAuthMessage(container.querySelector('.star-btn'));
         return;
     }
 
-    const container = star.closest('.rating-container');
-    if (!container) return;
-
     const card = container.closest('.resorts-card');
-    
-    // 🔥 Получаем сохранённую оценку
     const savedRating = card ? parseInt(card.dataset.userRating) || 0 : 0;
 
-    // 🔥 Возвращаем звёзды к сохранённому состоянию
     container.querySelectorAll('.star-btn').forEach(btn => {
         const val = parseInt(btn.dataset.value);
         btn.classList.toggle('active', val <= savedRating);
     });
-}, true);
+});
 
-function hideAuthTooltip() {
-    const tooltip = document.querySelector('.auth-tooltip');
-    if (tooltip) {
-        tooltip.remove();
-    }
-}
+
+
+
 
 const RatingModule = {
     enabled: false,
@@ -321,15 +431,148 @@ const RatingModule = {
 };
 
 
+
 document.addEventListener('auth:changed', (event) => {
-    const authStatus = event.detail.isAuthenticated;
+
+    isAuthenticated = event.detail.isAuthenticated; 
+        
+    const authStatus = isAuthenticated;
     
     if (authStatus) {
         RatingModule.enable();
     } else {
         RatingModule.disable();
     }
+
+    document.querySelectorAll('.resorts-card').forEach(card => {
+        const infoChild2 = card.querySelector('.info-child-2');
+        let existingBtn = infoChild2.querySelector('.open-modal-btn');
+        if (authStatus) {
+            if (!existingBtn) {
+                const resort = JSON.parse(card.dataset.resort);
+                const button = document.createElement('button');
+                button.className = 'open-modal-btn';
+                button.textContent = 'Оставить отзыв';
+                button.addEventListener('click', () => openModal(resort));
+                infoChild2.appendChild(button);
+            }
+        } else {
+            if (existingBtn) {
+                existingBtn.remove();
+            }
+        }
+    });
 });
 
+let currentResort = null;
+
+function closeModal() {
+    const modal = document.getElementById("review-modal");
+    if (!modal) return;
+    modal.classList.remove('open');
+}
+
+const closeBtn = document.querySelector('.close-btn');
+
+if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+}
+
+async function submitReview() {
+    const comment = document.getElementById("review-comment").value;
+    const rating = modalRating;
+    const token = localStorage.getItem('access_token');
+    console.log("Мой токен:", token);
+
+    if (!rating) {
+        alert("Поставьте оценку");
+        return;
+    }
+
+    const data = {
+        product_id: currentResort.id,
+        rating: rating,
+        comment: comment
+    };
+
+    try {
+        const response = await fetch("/reviews/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        });
+        
+        if (response.status === 401) {
+            alert("Сессия истекла. Войдите заново.");
+            localStorage.removeItem('access_token'); // Удаляем протухший паспорт
+            showLogin(); // Показываем форму логина
+            return;
+        };
+
+        if (response.ok) {
+            alert("Отзыв отправлен!");
+            closeModal();
+        } else {
+            alert("Ошибка при отправке");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Ошибка сети");
+    }
+}
+
+const submitBtn = document.querySelector('.submit-btn');
+
+if (submitBtn) {
+    submitBtn.addEventListener('click', submitReview);
+}
+
+let modalRating = 0;
+
+document.querySelectorAll('.review-modal .star').forEach((star, index) => {
+    star.addEventListener('click', () => {
+        modalRating = index + 1;
+
+        document.querySelectorAll('.review-modal .star').forEach((s, i) => {
+            s.classList.toggle('active', i < modalRating);
+        });
+    });
+});
+
+
+function openModal(resort) {
+    currentResort = resort;
+
+    modalRating = 0;
+
+    document.querySelectorAll('.review-modal .star').forEach(s => {
+        s.classList.remove('active');
+    });
+
+    const modal = document.getElementById("review-modal");
+    if (modal) {
+        modal.classList.add('open');
+    }
+
+    document.getElementById("modal-name").innerText = resort.name;
+    document.getElementById("modal-height").innerText = "Высота: " + resort.peak_height;
+    document.getElementById("modal-rating").innerText = "Рейтинг: " + resort.rating;
+    document.getElementById("modal-image").src = resort.image;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    isAuthenticated = checkAuth(); 
+    
+    if (isAuthenticated) {
+        RatingModule.enable();
+    }
+    
+    if (document.getElementById('resorts-container')) {
+        loadResorts();
+    }
+});
 
 // document.addEventListener('DOMContentLoaded', loadResorts);

@@ -1,18 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <header>
-        
-    </header>
-    <main>
-        профиль
-    </main>
+{% extends "base.html" %}
 
-    
-</body>
-</html>
+{% block content %}
+<div class="main-container">
+    <div class="profile-background">
+        <div class="background-top"></div>
+        <div class="background-bottom"></div>
+    </div>
+
+    <div class="profile-content-overlay">
+        <div class="profile-card">
+            <div class="profile-card__content">
+                <div class="profile-card__header">
+                    <div class="avatar-container">
+                        <img src="/static/photo/profile/avatar/main.jpg" alt="Vealont" class="avatar">
+                    </div>
+                    <div class="user-info">
+                        <h1>Vealont</h1>
+                    </div>
+                </div>
+                
+                <h2 class="section-title">Ваши отзывы</h2>
+
+                <div class="profile-card__reviews_grid">
+                   
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<template id="reviews-card-template">
+    <article class="review-card">
+        <div class="review-card__content">
+            <h3 class="card-title" data-field="review-name">Rosa Khutor</h3>
+            <div class="card-location">
+                <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span class="location-text" data-field="review-location">Sochi, Russia</span>
+            </div>
+            <div class="card__content">
+                <div class="card__rating" data-field="stars-wrapper">
+                </div>
+                <div class="card__comment" data-field="review-comment">
+                    <p>
+                        Отличный курорт с разнообразными трассами для всех уровней. 
+                        Великолепные виды и отличная инфраструктура. Рекомендую!
+                    </p>
+                </div>
+                <div class="time-reviewed">
+                    <p data-field="review-date">March 2026</p>
+                </div>
+                
+            </div>
+        </div>
+    </article>
+</template>
+
+<template id="star-template">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="#ffc107">
+        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+    </svg>
+</template>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="/static/JS/profile.js"></script>
+<script type="module" src="/static/JS/resorts.js"></script>
+
+{% endblock %}

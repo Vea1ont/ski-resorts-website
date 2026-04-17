@@ -22,15 +22,15 @@ def verify_password(plain_password:str, hashed_password:str) -> bool:
 
 def create_jwt_token(data: dict):
     to_encode = data.copy()
-    time_expire = datetime.now(timezone.utc) + timedelta(settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    time_expire = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     to_encode.update({"exp": time_expire}) # Добавляем время истечения в данные токена
     return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     # присутствие моего секретного ключа в токене пользователя подтверждает что:
         # 1) этот токен был выдан моим сервером/клиентом
         # 2) содержимое токена не было изменено после выдачи
         
-def decode_token(token: Annotated[str, Depends(auth2_scheme)]):
+def decode_token(token: str):
     payload = jwt.decode(token, settings.SECRET_KEY, algorithms=settings.ALGORITHM)
-    return payload.get('sub')
+    return payload
 
 
