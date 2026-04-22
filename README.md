@@ -43,5 +43,6 @@ Ski Resorts Russia
 
 4. **Найстройте базу данных**
      Создайте БД PostgreSQL и укажите параметры подключения в .env файле (или в конфиге).
-5. ****
+5. **Uvicorn**
+   uvicorn app.main:app --reload
     
