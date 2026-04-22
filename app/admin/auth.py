@@ -19,7 +19,7 @@ class AdminAuth(AuthenticationBackend):
 
     async def logout(self, request: Request):
         
-        response.delete_cookie(key="token")  # <-- имя cookie должно совпадать
+        Response.delete_cookie(key="access_token")  # <-- имя cookie должно совпадать
         return {"msg": "logged out"}
 
 
