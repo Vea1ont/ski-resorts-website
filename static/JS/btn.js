@@ -1,5 +1,5 @@
 document.querySelector(".btn-watch").addEventListener("click", function() {
-    document.querySelector(".first-tour").scrollIntoView({
+    document.querySelector(".resorts-grid").scrollIntoView({
         behavior: "smooth"
     });
 });

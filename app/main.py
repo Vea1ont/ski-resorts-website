@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 
 from app.db import database, admin_engine
-from app.routers import auth, profile, catalog, resorts, reviews, about
+from app.routers import auth, profile, catalog, resorts, reviews, about, contacts, news
 
 from app.core.templates import templates
 
@@ -60,6 +60,8 @@ app.include_router(catalog.router_tour)
 app.include_router(resorts.router_resorts)
 app.include_router(reviews.router)
 app.include_router(about.about_router)
+app.include_router(contacts.contacts_router)
+app.include_router(news.router_news)
 # templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)

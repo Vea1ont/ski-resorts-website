@@ -18,10 +18,6 @@
         <div class="nav-container">
             <nav class="nav-bar">
                 <div class="left-section">
-
-                    <!-- <button class="z" onclick="showMain()" > -->
-                        <!-- <img src="/static/logos/ztype.png" alt="z"> -->
-                    <!-- </button> -->
                     <button class="ski-spot" onclick="showMain()">
                         <img src="/static/logos/mountain/white-soft-mountain.png" alt="main-logo">
                         SkiSpot
@@ -29,6 +25,8 @@
                     <ul class="nav-links">
                         <li><a href="/">Главная</a></li> 
                         <li><a href="/about">О проекте</a></li>
+                        <li><a href="/contacts">Контакты</a></li>
+                        <li><a href="/news">Новости</a></li>
                     </ul>
                 </div>
                 
@@ -38,7 +36,7 @@
                         <a href="#"><img src="/static/logos/image_2025-10-16_20-47-28.png"></a>
                         <a href="#"><img src="/static/logos/image_2025-10-16_20-47-47.png"></a>
                     </div> -->
-                    
+                    <div id="current-date" class="header-date"></div>
                     <button class="btn-log-in">Log in</button>
                     
                     <div class="user-buttons-container hidden">
@@ -51,7 +49,25 @@
                         </button>
                     </div>
                 </div>
+
+                <button class="burger-btn" id="burgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </nav>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="mobile-nav-links">
+                <li><a href="/" onclick="toggleBurger()">Главная</a></li>
+                <li><a href="/about" onclick="toggleBurger()">О проекте</a></li>
+                <li><a href="/contacts" onclick="toggleBurger()">Контакты</a></li>
+                <li><a href="/news" onclick="toggleBurger()">Новости</a></li>
+            </ul>
+            <div class="mobile-bottom">
+                <div id="mobile-date" class="header-date"></div>
+                <button class="btn-log-in mobile-login">Log in</button>
+            </div>
         </div>
     </header>
 

@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="news-page">
+
+  <section class="news-hero">
+    <div class="news-hero__bg">
+      <div class="news-hero__overlay"></div>
+    </div>
+    <div class="news-hero__content">
+      <span class="news-hero__label">НОВОСТИ ГОРНЫХ КУРОРТОВ</span>
+      <h1 class="news-hero__title">Горы. Скорость. Зима.</h1>
+      <p class="news-hero__subtitle">
+        Всё о горнолыжных курортах России — от Кавказа до Сибири.
+        Актуальные репортажи, прогнозы погоды и советы для тех, кто выбирает горы.
+      </p>
+    </div>
+  </section>
+
+  <section class="news-feed">
+    <div class="news-feed__container">
+      <h2 class="news-feed__heading">ПОСЛЕДНИЕ НОВОСТИ</h2>
+
+      <a href="#modal-1" class="article-featured">
+        <div class="article-featured__image" style="background-image: url('/static/photo/news_block/krasnaya_polyana.png')">
+          <div class="article-featured__overlay"></div>
+        </div>
+        <div class="article-featured__content">
+          <h2 class="article-featured__title">Красная Поляна открывает новые трассы: сезон 2025–2026</h2>
+          <p class="article-featured__excerpt">Горнолыжный курорт Красная Поляна объявил об открытии пяти новых трасс общей протяжённостью 18 километров. Новые маршруты охватывают как новичков, так и опытных лыжников.</p>
+          <div class="article-featured__meta">
+            <span class="article-meta__date">18 мая 2026</span>
+            <span href="#" class="article-featured__link">Читать →</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="article-grid">
+
+        <a href="#modal-2" class="article-card">
+          <div class="article-card__image" style="background-image: url('/static/photo/news_block/skier2.png')">
+            <span class="article-tag">ПОГОДА</span>
+          </div>
+          <div class="article-card__content">
+            <h3 class="article-card__title">Снегопады накрыли Домбай: горы ждут туристов</h3>
+            <p class="article-card__excerpt">Мощные снегопады пришли на Кавказ — курорт Домбай получил более 80 сантиметров свежего снега за три дня.</p>
+            <div class="article-card__meta">
+              <span class="article-meta__date">20 мая 2026</span>
+              <span href="#" class="article-card__link">Читать →</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#modal-3" class="article-card">
+          <div class="article-card__image" style="background-image: url('/static/photo/news_block/skier1.png')">
+            <span class="article-tag">ИНФРАСТРУКТУРА</span>
+          </div>
+          <div class="article-card__content">
+            <h3 class="article-card__title">Шерегеш запускает новый подъёмник: скорость и вместимость</h3>
+            <p class="article-card__excerpt">Кузбасский курорт Шерегеш открыл шестиместный гондольный подъёмник — самый современный в Сибири.</p>
+            <div class="article-card__meta">
+              <span class="article-meta__date">17 мая 2026</span>
+              <span href="#" class="article-card__link">Читать →</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#modal-4" class="article-card">
+          <div class="article-card__image" style="background-image: url('/static/photo/news_block/elbrus.png')">
+            <span class="article-tag">ГИД</span>
+          </div>
+          <div class="article-card__content">
+            <h3 class="article-card__title">Эльбрус для начинающих: маршруты и советы</h3>
+            <p class="article-card__excerpt">Если вы никогда не поднимались выше 3000 метров — Эльбрус ждёт. Разбираем базовые маршруты и главные правила безопасности.</p>
+            <div class="article-card__meta">
+              <span class="article-meta__date">15 мая 2026</span>
+              <span href="#" class="article-card__link">Читать →</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="#modal-5" class="article-card">
+          <div class="article-card__image" style="background-image: url('/static/photo/news_block/ski_mountain.png')">
+            <span class="article-tag">СПОРТ</span>
+          </div>
+          <div class="article-card__content">
+            <h3 class="article-card__title">Чемпионат России по горным лыжам: итоги этапа</h3>
+            <p class="article-card__excerpt">На трассах Розы Хутор завершился очередной этап кубка страны. Подводим итоги и рассказываем о звёздах сезона.</p>
+            <div class="article-card__meta">
+              <span class="article-meta__date">12 мая 2026</span>
+              <span href="#" class="article-card__link">Читать →</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="news-modal" id="modal-1">
+      <a href="#" class="news-modal__overlay"></a>
+
+      <div class="news-modal__box">
+        <a href="#" class="news-modal__close">✕</a>
+
+        <div 
+          class="news-modal__image" 
+          style="background-image: url('/static/photo/news_block/krasnaya_polyana.png')">
+        </div>
+      
+        <div class="news-modal__body">
+          <span class="article-tag">РЕПОРТАЖ</span>
+          <h2>Красная Поляна открывает новые трассы: сезон 2025–2026</h2>
+          <p>
+            Курорт завершил масштабную модернизацию северного склона, благодаря чему уже к декабрю для гостей станут доступны пять новых трасс разного уровня сложности. Для начинающих подготовлены широкие безопасные участки с плавным уклоном, а опытные райдеры смогут протестировать скоростные спуски с перепадом высот более 900 метров. Дополнительно обновлена система искусственного оснежения, что позволит поддерживать идеальное покрытие даже при нестабильной погоде.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-modal" id="modal-2">
+       <a href="#" class="news-modal__overlay"></a>
+
+      <div class="news-modal__box">
+        <a href="#" class="news-modal__close">✕</a>
+
+        <div 
+          class="news-modal__image" 
+          style="background-image: url('/static/photo/news_block/skier2.png')">
+        </div>
+      
+        <div class="news-modal__body">
+          <span class="article-tag">ПОГОДА</span>
+          <h2>Снегопады накрыли Домбай: горы ждут туристов</h2>
+          <p>
+            За последние трое суток на склонах Домбая выпало рекордное количество снега, что уже привело к увеличению бронирований гостиниц почти на 40%. Специалисты отмечают отличное качество снежного покрова и обещают идеальные условия для катания в ближайшие недели. Администрация курорта усилила работу ратраков и рекомендует туристам заранее бронировать ски-пассы из-за ожидаемого наплыва гостей.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="news-modal" id="modal-3">
+      <a href="#" class="news-modal__overlay"></a>
+
+      <div class="news-modal__box">
+        <a href="#" class="news-modal__close">✕</a>
+
+        <div 
+          class="news-modal__image" 
+          style="background-image: url('/static/photo/news_block/skier1.png')">
+        </div>
+      
+        <div class="news-modal__body">
+          <span class="article-tag">ИНФРАСТРУКТУРА</span>
+          <h2>Шерегеш запускает новый подъёмник: скорость и вместимость</h2>
+          <p>
+            Новый шестиместный гондольный подъёмник способен перевозить до 3200 человек в час и сокращает время подъёма почти вдвое. Кабины оборудованы панорамными окнами, системой подогрева сидений и современной системой безопасности. Запуск объекта стал частью крупной инвестиционной программы развития Шерегеша, рассчитанной на расширение туристического потока в ближайшие пять лет.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="news-modal" id="modal-4">
+      <a href="#" class="news-modal__overlay"></a>
+
+      <div class="news-modal__box">
+        <a href="#" class="news-modal__close">✕</a>
+
+        <div 
+          class="news-modal__image" 
+          style="background-image: url('/static/photo/news_block/elbrus.png')">
+        </div>
+      
+        <div class="news-modal__body">
+          <span class="article-tag">ГИД</span>
+          <h2>Эльбрус для начинающих: маршруты и советы</h2>
+          <p>
+            Для новичков на Эльбрусе подготовлены адаптированные маршруты с обязательным сопровождением инструкторов и точками акклиматизации. Эксперты советуют начинать подъём постепенно, уделяя особое внимание физической подготовке и правильному подбору экипировки. Даже базовое восхождение требует дисциплины, однако при грамотной подготовке становится доступным и безопасным приключением.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="news-modal" id="modal-5">
+      <a href="#" class="news-modal__overlay"></a>
+
+      <div class="news-modal__box">
+        <a href="#" class="news-modal__close">✕</a>
+
+        <div 
+          class="news-modal__image" 
+          style="background-image: url('/static/photo/news_block/ski_mountain.png')">
+        </div>
+      
+        <div class="news-modal__body">
+          <span class="article-tag">СПОРТ</span>
+          <h2>Чемпионат России по горным лыжам: итоги этапа</h2>
+          <p>
+            Завершившийся этап чемпионата собрал сильнейших спортсменов страны и стал одним из самых зрелищных за последние годы. Особое внимание зрителей привлекли молодые участники, показавшие результаты на уровне международных стандартов. Тренеры отмечают рост конкуренции и высокий технический уровень трассы, что делает предстоящий финал сезона особенно интригующим для болельщиков.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

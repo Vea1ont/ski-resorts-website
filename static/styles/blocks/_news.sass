@@ -1,0 +1,348 @@
+@use "_fonts"
+
+$bg: #0d1117
+$surface: #161c27
+$border: rgba(255, 255, 255, 0.07)
+$text: #e8edf5
+$muted: #7a8799
+$accent: #3b82f6
+
+
+a
+    text-decoration: none
+
+.news-page
+  background: $bg
+  color: $text
+//   font-family: 'Golos Text', sans-serif
+  min-height: 100vh
+
+.news-hero
+  position: relative
+  min-height: 520px
+  display: flex
+  flex-direction: column
+  justify-content: flex-end
+  overflow: hidden
+
+  &__bg
+    position: absolute
+    inset: 0
+    background-size: cover
+    background-position: center
+    background: url(/static/photo/bg_news.png) no-repeat center
+
+  &__overlay
+    position: absolute
+    inset: 0
+    background: linear-gradient(to bottom, rgba(13,17,23,0.2) 0%, rgba(13,17,23,0.95) 85%, $bg 100%)
+
+  &__content
+    position: relative
+    z-index: 2
+    padding: 40px 48px 32px
+    max-width: 680px
+
+  &__label
+    display: inline-block
+    font-size: 11px
+    font-weight: 600
+    letter-spacing: 0.14em
+    color: $accent
+    background: rgba(59,130,246,0.15)
+    border: 1px solid rgba(59,130,246,0.35)
+    border-radius: 4px
+    padding: 4px 10px
+    margin-bottom: 16px
+
+  &__title
+    font-family: 'SCP'
+    font-size: 75px
+    font-weight: 200
+    line-height: 1
+    margin: 0 0 16px
+    color: #fff
+
+  &__subtitle
+    font-size: 15px
+    line-height: 1.6
+    color: rgba(232,237,245,0.75)
+    max-width: 420px
+    margin: 0
+
+.news-feed
+  padding: 60px 0 80px
+
+  &__container
+    max-width: 1200px
+    margin: 0 auto
+    padding: 0 24px
+
+  &__heading
+    font-size: 11px
+    font-weight: 700
+    letter-spacing: 0.2em
+    color: $accent
+    text-align: center
+    margin: 0 0 40px
+
+  &__more
+    text-align: center
+    margin-top: 56px
+
+.article-featured
+  position: relative
+  border-radius: 16px
+  overflow: hidden
+  min-height: 320px
+  display: flex
+  align-items: flex-end
+  margin-bottom: 32px
+
+  &__image
+    position: absolute
+    inset: 0
+    background-size: cover
+    background-position: center
+
+  &__overlay
+    position: absolute
+    inset: 0
+    background: linear-gradient(to right, rgba(13,17,23,0.9) 0%, rgba(13,17,23,0.2) 100%)
+
+  &__content
+    position: relative
+    z-index: 2
+    padding: 40px 44px
+    max-width: 580px
+
+  &__title
+    font-family: 'Bebas Neue', sans-serif
+    font-size: clamp(28px, 3.5vw, 42px)
+    line-height: 1.1
+    color: #fff
+    margin: 12px 0 14px
+
+  &__excerpt
+    font-size: 14px
+    line-height: 1.65
+    color: rgba(232,237,245,0.75)
+    margin: 0 0 20px
+
+  &__meta
+    display: flex
+    align-items: center
+    gap: 20px
+
+  &__link
+    color: $accent
+    font-size: 14px
+    font-weight: 600
+    text-decoration: none
+    margin-left: auto
+    background-color: rgba(19, 33, 55, 0.55)
+    border: 1px solid rgba(59,130,246,0.35)
+    border-radius: 4px
+    padding: 6px 14px
+    
+
+
+
+
+.article-grid
+  display: grid
+  grid-template-columns: repeat(4, 1fr)
+  gap: 20px
+
+  @media (max-width: 1024px)
+    grid-template-columns: repeat(2, 1fr)
+
+  @media (max-width: 600px)
+    grid-template-columns: 1fr
+
+.article-card
+    background: $surface
+    border: 1px solid $border
+    border-radius: 12px
+    overflow: hidden
+    display: flex
+    flex-direction: column
+
+    &__image
+        height: 180px
+        background-size: cover
+        background-position: center
+        position: relative
+
+        .article-tag
+            display: inline-block
+            font-size: 10px
+            font-weight: 700
+            letter-spacing: 0.13em
+            padding: 4px 9px
+            margin: 12px
+            border-radius: 4px
+            color: rgba(183, 0, 255, 1)
+            background: rgba(183, 0, 255, 0.12)
+            border: 1px solid rgba(183, 0, 255, 1)
+
+    &__content
+        padding: 20px
+        display: flex
+        flex-direction: column
+        flex: 1
+
+    &__meta
+        display: flex
+        flex-direction: column
+        align-items: center
+        gap: 12px
+
+    &__title
+        font-size: 15px
+        font-weight: 600
+        line-height: 1.35
+        color: $text
+        margin: 0 0 10px
+
+    &__excerpt
+        font-size: 13px
+        line-height: 1.6
+        color: $muted
+        flex: 1
+        margin-bottom: 16px
+
+    &__footer
+        display: flex
+        align-items: center
+        justify-content: space-between
+        padding-top: 14px
+        border-top: 1px solid $border
+
+    &__link
+        font-size: 12px
+        font-weight: 600
+        color: $accent
+        text-decoration: none
+
+.article-meta__date
+    font-size: 12px
+    color: $muted
+
+.btn-more
+  display: inline-block
+  padding: 13px 40px
+  font-size: 13px
+  font-weight: 600
+  letter-spacing: 0.1em
+  color: $text
+  background: #1c2433
+  border: 1px solid $border
+  border-radius: 8px
+  text-decoration: none
+.news-modal
+  position: fixed
+  inset: 0
+  z-index: 9999
+  display: flex
+  align-items: center
+  justify-content: center
+
+  opacity: 0
+  visibility: hidden
+  pointer-events: none
+
+  transition: .35s ease
+
+  &:target
+    opacity: 1
+    visibility: visible
+    pointer-events: auto
+
+    .news-modal__box
+      transform: translateY(0)
+      opacity: 1
+
+.news-modal__overlay
+  position: absolute
+  inset: 0
+  background: rgba(0,0,0,.75)
+  backdrop-filter: blur(8px)
+
+.news-modal__box
+  position: relative
+  width: min(900px, 92vw)
+  max-height: 90vh
+  overflow-y: auto
+
+  background: $surface
+  border: 1px solid $border
+  border-radius: 18px
+
+  transform: translateY(40px)
+  opacity: 0
+  transition: .35s ease
+
+.news-modal__image
+  height: 340px
+  background-size: cover
+  background-position: center
+
+.news-modal__body
+  padding: 32px
+
+  h2
+    margin: 16px 0
+    font-size: 32px
+
+  p
+    color: $muted
+    line-height: 1.7
+
+.news-modal__close
+  position: absolute
+  top: 18px
+  right: 18px
+
+  width: 42px
+  height: 42px
+
+  border-radius: 50%
+  background: rgba(255,255,255,.08)
+
+  display: flex
+  align-items: center
+  justify-content: center
+
+  color: white
+  text-decoration: none
+  font-size: 18px
+
+@media (max-width: 768px)
+  .news-hero
+    min-height: 380px
+
+    &__content
+      padding: 24px 20px
+
+  .weather-bar__inner
+    flex-wrap: nowrap
+    overflow-x: auto
+    justify-content: flex-start
+    padding: 0 16px
+
+  .weather-item
+    flex-shrink: 0
+    padding: 14px 24px
+
+  .article-featured
+    min-height: 440px
+
+    &__overlay
+      background: linear-gradient(to top, rgba(13,17,23,0.95) 0%, transparent 100%)
+
+    &__content
+      padding: 24px 20px
+
+  .news-feed
+    padding: 40px 0 60px

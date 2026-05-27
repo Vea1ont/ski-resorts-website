@@ -1,8 +1,29 @@
 import { checkAuth } from './auth.js';
 
-// Объявляем асинхронную функцию postData для отправки POST-запросов на сервер
-// url - адрес сервера, data - данные для отправки
+
 console.log("Скрипт успешно загружен!");
+
+
+function updateDateTime() {
+    const now = new Date();
+
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Месяцы в JS идут от 0 до 11
+    const year = now.getFullYear();
+
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    const dateString = `${day}.${month}.${year}`;
+    const timeString = `${hours}:${minutes}:${seconds}`;
+
+    document.getElementById('current-date').innerHTML = `${dateString} | ${timeString}`;
+}
+
+updateDateTime();
+setInterval(updateDateTime, 1000);
+
 
 async function postData(url, data) {
     const response = await fetch(url, {
@@ -25,7 +46,6 @@ async function postData(url, data) {
 
 
 
-// Обработчик для кнопки "Log in" в навбаре
 const btnLogIn = document.querySelector('.btn-log-in');
 if (btnLogIn) {
     btnLogIn.addEventListener('click', switchMainToLogin);
@@ -41,13 +61,11 @@ if (btnOrLogin) {
     btnOrLogin.addEventListener('click', showLogin);
 }
 
-// Обработчик для кнопки "Get Started" на главной странице
 const btnHeroStart = document.querySelector('.btn-hero-start');
 if (btnHeroStart) {
     btnHeroStart.addEventListener('click', switchMainToLogin);
 }
 
-// Функция для переключения между главной страницей и формами входа/регистрации
 function switchMainToLogin() {
     const hero = document.getElementById('hero');
     const log = document.getElementById('log');
@@ -137,16 +155,13 @@ if (loginSubmitBtn) {
             
             checkAuth();
     
-            // Перенаправляем пользователя на главную страницу
             window.location.href = '/';
         } catch (error) {
-            // Обрабатываем ошибки при входе
-            console.error('Login error:', error); // Логируем ошибку в консоль
-            // Показываем разные сообщения в зависимости от типа ошибки
+            console.error('Login error:', error); 
             if (error.detail) {
-                alert('Login failed: ' + error.detail); // Если есть детальное описание ошибки
+                alert('Login failed: ' + error.detail); 
             } else {
-                alert('Login failed. Please check your credentials.'); // Стандартное сообщение
+                alert('Login failed. Please check your credentials.');
             }
         }
     });
@@ -155,18 +170,16 @@ if (loginSubmitBtn) {
 
 
 // Находим кнопку создания аккаунта и добавляем обработчик клика
-
 const makeAccBtn = document.querySelector('.makeAcc-btn');
 
 if (makeAccBtn) {
     makeAccBtn.addEventListener('click', async function() {
-        const name = document.getElementById('nikname').value;     // Имя пользователя
-        const age = document.getElementById('age').value;          // Возраст
-        const password = document.getElementById('pass').value;    // Пароль
-        const confirmPassword = document.getElementById('againpass').value; // Подтверждение пароля
-        const email = document.getElementById('email').value;      // Email
+        const name = document.getElementById('nikname').value;     
+        const age = document.getElementById('age').value;          
+        const password = document.getElementById('pass').value;    
+        const confirmPassword = document.getElementById('againpass').value; 
+        const email = document.getElementById('email').value;      
 
-        // Валидация полей: проверяем каждое поле на заполненность
         if (!name) {
             alert('Please fill name');
             return;
@@ -187,13 +200,11 @@ if (makeAccBtn) {
             return;
         }
 
-        // Проверяем, совпадают ли пароли
         if (password !== confirmPassword) {
             alert('Password do not match');
             return;
         }
     
-        // Проверяем, что возраст - это число и не отрицательный
         if (isNaN(age) || age < 0) {
             alert('Please enter a valid age');
             return;
@@ -202,19 +213,18 @@ if (makeAccBtn) {
         try {
             // Отправляем POST запрос на эндпоинт /register с данными регистрации
             const result = await postData('/auth/register', {
-                name: name,                     // Имя пользователя
-                email: email,                   // Email (обязательное поле)
-                password: password,             // Пароль
-                age: parseInt(age)              // Возраст как число (преобразуем из строки)
+                name: name,                     
+                email: email,                   
+                password: password,             
+                age: parseInt(age)              
             });
 
-            console.log('Registration successful: ', result); // Логируем успешную регистрацию
-            alert('Registration successful! You can log in.'); // Сообщение об успехе
+            console.log('Registration successful: ', result); 
+            alert('Registration successful! You can log in.'); 
 
             // После успешной регистрации показываем форму входа
             showLogin();
         } catch (error) {
-            // Обрабатываем ошибки при регистрации
             console.error('Registration error: ', error);
             if (error.detail) {
                 alert('Registration failed: ' + error.detail);
@@ -229,17 +239,14 @@ if (makeAccBtn) {
 const logoutBtn = document.querySelector('.btn-logout');
 if (logoutBtn) {
     logoutBtn.addEventListener('click', function() {
-        localStorage.removeItem('access_token'); // Удаляем токен
-        localStorage.removeItem('user_id');      // Удаляем ID пользователя
-        localStorage.removeItem('user_email');   // Удаляем email
+        localStorage.removeItem('access_token'); 
+        localStorage.removeItem('user_id');      
+        localStorage.removeItem('user_email');   
 
-        // Показываем сообщение об успешном выходе
         alert('You have been successfully logged out');
 
-        // Проверяем и обновляем состояние авторизации
         checkAuth();
 
-        // Если пользователь не на главной странице, перенаправляем его туда
         if (window.location.pathname !== '/') {
             window.location.href = '/';
         }
@@ -254,6 +261,14 @@ if (btnProfile) {
     });
 }
 
+document.getElementById('burgerBtn').addEventListener('click', toggleBurger);
+
+function toggleBurger() {
+    const btn = document.getElementById('burgerBtn');
+    const menu = document.getElementById('mobileMenu');
+    btn.classList.toggle('active');
+    menu.classList.toggle('open');
+}
+
 const btnAbout = document.querySelector('.btn-about');
-// Запускаем проверку авторизации когда DOM полностью загружен
 document.addEventListener('DOMContentLoaded', checkAuth);
